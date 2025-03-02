@@ -13,11 +13,7 @@ namespace ProblemSolvingPratice
             while (start <= end && str1[start] == ' ') start++;
             while (end >= start && str1[end] == ' ') end--;
 
-            //for (int i = start; i <= end; i++)
-            //{
-            //    result += str1[i];
-            //}
-
+         
             int index = 0;
             foreach (char c in str1)
             {
@@ -114,20 +110,46 @@ namespace ProblemSolvingPratice
             return factorial;
         }
 
+        public static int missingNoInSortedArray(int[] arr)
+        {
+            for (int i = 0; i < arr.Length - 1; i++)
+            {
+                if (arr[i] + 1 != arr[i + 1])
+                {
+                    return arr[i] + 1;
+                }
+            }
+
+            throw new Exception("No missing number in the array.");
+        }
 
 
+        public static int climbStairs(int n)
+        {
+            if (n <= 2) return n;
+            int prev2 = 1, prev1 = 2;
+            for (int i = 3; i <= n; i++)
+            {
+                int curr = prev1 + prev2;
+                prev2 = prev1;
+                prev1 = curr;
+            }
+            return prev1;
+        }
 
         static void Main(string[] args)
         {
-            // string str = " qadeer ";
-            // string result = string.Empty;
-            // foreach(char c in str){
-            //     if(c != ' '){
-            //         result += c;
-            //     }
-            // }
+            string str = " qadeer ";
+            string result = string.Empty;
+            foreach (char c in str)
+            {
+                if (c != ' ')
+                {
+                    result += c;
+                }
+            }
 
-            string str = "  This is a book   ";
+            //string str = "  This is a book   ";
             string str1 = "Some String";
             string str2 = "This is a book";
             removeLeadingAndTrailingSpace(str);
@@ -140,6 +162,18 @@ namespace ProblemSolvingPratice
             int num = 3;
             int factorial = findFactorialRecursively(num);
             Console.WriteLine($"Factorial of the number {num} is: {factorial}");
+
+            Console.WriteLine("---------------------------------------------------------");
+            int[] arr1 = { 1, 2, 4, 5, 6 };
+            int missingNum = missingNoInSortedArray(arr1);
+            Console.WriteLine($"Missing num in array is: {missingNum}");
+
+            Console.WriteLine("---------------------------------------------------------");
+
+            int steps = climbStairs(4);
+            Console.WriteLine($"No of Steps are: {steps}");
+
+
         }
     }
 }
