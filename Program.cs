@@ -137,6 +137,33 @@ namespace ProblemSolvingPratice
             return prev1;
         }
 
+        // LeetCode: 88 Merge Sorted Array
+
+        public static void Merge(int[] nums1, int m, int[] nums2, int n)
+        {
+            int i = m - 1; // Pointer for nums1 (excluding the trailing zeros)
+            int j = n - 1; // Pointer for nums2
+            int k = m + n - 1; // Pointer for inserting in nums1 from the end
+
+            // Merge nums1 and nums2 from the back
+            while (i >= 0 && j >= 0)
+            {
+                if (nums1[i] > nums2[j])
+                {
+                    nums1[k--] = nums1[i--];
+                }
+                else
+                {
+                    nums1[k--] = nums2[j--];
+                }
+            }
+
+            // If nums2 is not fully merged, copy remaining elements
+            while (j >= 0)
+            {
+                nums1[k--] = nums2[j--];
+            }
+        }
         static void Main(string[] args)
         {
             string str = " qadeer ";
@@ -172,6 +199,12 @@ namespace ProblemSolvingPratice
 
             int steps = climbStairs(4);
             Console.WriteLine($"No of Steps are: {steps}");
+
+            Console.WriteLine("------------------------------------------------------------");
+
+            int[] nums1 = { 1, 2, 3, 0, 0, 0 };
+            int[] nums2 = { 2, 5, 6 };
+            Merge(nums1, 3, nums2, 3);
 
 
         }
