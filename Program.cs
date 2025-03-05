@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace ProblemSolvingPratice
 {
@@ -13,7 +15,7 @@ namespace ProblemSolvingPratice
             while (start <= end && str1[start] == ' ') start++;
             while (end >= start && str1[end] == ' ') end--;
 
-         
+
             int index = 0;
             foreach (char c in str1)
             {
@@ -164,6 +166,31 @@ namespace ProblemSolvingPratice
                 nums1[k--] = nums2[j--];
             }
         }
+
+        //125. Valid Palindrome
+        public static bool IsPalindrome(string s)
+        {
+            s = Regex.Replace(s, "[^a-zA-Z0-9]", "").ToLower();
+            Stack<char> stack = new Stack<char>();
+
+            string result = string.Empty;
+
+            foreach (char c in s)
+            {
+                stack.Push(c);
+            }
+
+            foreach (char c in s)
+            {
+                if (stack.Pop() != c)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+
+        }
         static void Main(string[] args)
         {
             string str = " qadeer ";
@@ -205,6 +232,14 @@ namespace ProblemSolvingPratice
             int[] nums1 = { 1, 2, 3, 0, 0, 0 };
             int[] nums2 = { 2, 5, 6 };
             Merge(nums1, 3, nums2, 3);
+
+            Console.WriteLine("------------------------------------------------------------");
+
+            string strr = "A man, a plan, a canal: Panama";
+
+            bool isValidPalindrom = IsPalindrome(strr);
+            Console.WriteLine($"String: {strr} ----  is valid palindrom ? : {isValidPalindrom}");
+
 
 
         }
