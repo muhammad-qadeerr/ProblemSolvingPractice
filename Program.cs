@@ -221,6 +221,26 @@ namespace ProblemSolvingPratice
             }
             return finalResult;
         }
+
+        // Leetcode: 3. Longest Substring Without Repeating Characters
+        // https://leetcode.com/problems/longest-substring-without-repeating-characters/description/
+
+        public static int LengthOfLongestSubstring(string s)
+        {
+            HashSet<char> charSet = new HashSet<char>();
+            int left = 0, maxLength = 0;
+            for (int right = 0; right < s.Length; right++)
+            {
+                while (charSet.Contains(s[right]))
+                {
+                    charSet.Remove(s[left]);
+                    left++;
+                }
+                charSet.Add(s[right]);
+                maxLength = Math.Max(maxLength, right - left + 1);
+            }
+            return maxLength;
+        }
         static void Main(string[] args)
         {
             string str = " qadeer ";
@@ -274,6 +294,14 @@ namespace ProblemSolvingPratice
 
             string coloumnTitle = ConvertToTitle(29);
             Console.WriteLine($"coloumnTitle: {coloumnTitle}");
+
+            Console.WriteLine("------------------------------------------------------------");
+
+            string inputStr = "abcabcbb";
+            // Case2: 
+            inputStr = "pwwkew";
+            int lenOfLongestSubStr = LengthOfLongestSubstring(inputStr);
+            Console.WriteLine($"Input Str: {inputStr}: Length of Longest Substring: {lenOfLongestSubStr}");
 
 
 
