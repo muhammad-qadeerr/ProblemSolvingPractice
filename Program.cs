@@ -272,6 +272,29 @@ namespace ProblemSolvingPratice
             return false;
         }
 
+        // Leetcode 162: Find Peak Element
+        // https://leetcode.com/problems/find-peak-element/description/
+
+        public static int FindPeakElement(int[] nums)
+        {
+            int min = 0;
+            int max = nums.Length - 1;
+            while (min < max)
+            {
+                int mid = (min + max) / 2;
+                if (nums[mid] < nums[mid +1])
+                {
+                    min = mid + 1;
+                }
+                else
+                {
+                    max = mid;
+                }
+                
+            }
+            return min;
+        }
+
         static void Main(string[] args)
         {
             /*
@@ -334,7 +357,6 @@ namespace ProblemSolvingPratice
             inputStr = "pwwkew";
             int lenOfLongestSubStr = LengthOfLongestSubstring(inputStr);
             Console.WriteLine($"Input Str: {inputStr}: Length of Longest Substring: {lenOfLongestSubStr}");
-            */
 
             Console.WriteLine("------------------------------------------------------------");
 
@@ -356,10 +378,14 @@ namespace ProblemSolvingPratice
             bool isLLCyclic = HasCycle(node1);
 
             Console.WriteLine($"Linklist head {nameof(node1)} has cycle: {isLLCyclic}");
+            */
 
+            Console.WriteLine("------------------------------------------------------------");
 
+            int[] arr = {1, 2, 3, 1};
+            int peak = FindPeakElement(arr);
 
-
+            Console.WriteLine($"Peak Element of {nameof(arr)} is at index: {peak}");
 
         }
     }
