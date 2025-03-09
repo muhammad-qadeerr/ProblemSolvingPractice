@@ -5,6 +5,16 @@ using System.Text.RegularExpressions;
 
 namespace ProblemSolvingPratice
 {
+    public class ListNode
+    {
+        public int val;
+        public ListNode next;
+        public ListNode(int x)
+        {
+            val = x;
+            next = null;
+        }
+    }
     internal class Program
     {
         public static void removeLeadingAndTrailingSpace(string str1)
@@ -241,8 +251,30 @@ namespace ProblemSolvingPratice
             }
             return maxLength;
         }
+
+        // Leetcode 141. Linked List Cycle
+        // https://leetcode.com/problems/linked-list-cycle/description/
+        public static bool HasCycle(ListNode head)
+        {
+            if (head == null || head.next == null)
+                return false;
+
+            ListNode slow = head;
+            ListNode fast = head;
+
+            while(fast != null && fast.next != null){
+                slow = slow.next;
+                fast = fast.next.next;
+
+                if (slow == fast)
+                    return true;
+            }
+            return false;
+        }
+
         static void Main(string[] args)
         {
+            /*
             string str = " qadeer ";
             string result = string.Empty;
             foreach (char c in str)
@@ -302,6 +334,30 @@ namespace ProblemSolvingPratice
             inputStr = "pwwkew";
             int lenOfLongestSubStr = LengthOfLongestSubstring(inputStr);
             Console.WriteLine($"Input Str: {inputStr}: Length of Longest Substring: {lenOfLongestSubStr}");
+            */
+
+            Console.WriteLine("------------------------------------------------------------");
+
+            ListNode node1 = new ListNode(1);
+            ListNode node2 = new ListNode(2);
+            ListNode node3 = new ListNode(3);
+            ListNode node4 = new ListNode(4);
+
+            // Creating a cycle
+            node1.next = node2;
+            node2.next = node3;
+            node3.next = node4;
+            //node4.next = node2;
+
+            // No Cycle
+
+            node4.next = null;
+
+            bool isLLCyclic = HasCycle(node1);
+
+            Console.WriteLine($"Linklist head {nameof(node1)} has cycle: {isLLCyclic}");
+
+
 
 
 
