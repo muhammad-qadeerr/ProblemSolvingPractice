@@ -262,7 +262,8 @@ namespace ProblemSolvingPratice
             ListNode slow = head;
             ListNode fast = head;
 
-            while(fast != null && fast.next != null){
+            while (fast != null && fast.next != null)
+            {
                 slow = slow.next;
                 fast = fast.next.next;
 
@@ -282,7 +283,7 @@ namespace ProblemSolvingPratice
             while (min < max)
             {
                 int mid = (min + max) / 2;
-                if (nums[mid] < nums[mid +1])
+                if (nums[mid] < nums[mid + 1])
                 {
                     min = mid + 1;
                 }
@@ -290,9 +291,54 @@ namespace ProblemSolvingPratice
                 {
                     max = mid;
                 }
-                
+
             }
             return min;
+        }
+
+        // Leetcode 167 - Two Sum II (Input Array is Sorted)
+        // https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/
+        public static int[] TwoSum(int[] numbers, int target)
+        {
+            int start = 0, end = numbers.Length - 1;
+
+            while (start < end)
+            {
+                if (numbers[start] + numbers[end] == target)
+                {
+                    return new int[] { start + 1, end + 1 };
+                }
+                else if (numbers[start] + numbers[end] > target)
+                {
+                    end--;
+                }
+                else
+                {
+                    start++;
+                }
+            }
+            return new int[] { -1, -1 };
+
+        }
+
+        // Leetcode 1: Simple Two Sum
+        public static int[] TwoSumSimple(int[] nums, int target)
+        {
+            Dictionary<int, int> map = new Dictionary<int, int>();
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+                int complement = target - nums[i];
+
+                if (map.ContainsKey(complement))
+                {
+                    return new int[] { map[complement], i };
+                }
+
+                map[nums[i]] = i;
+            }
+
+            return new int[] { -1, -1 }; // Return a default value if no solution exists
         }
 
         static void Main(string[] args)
@@ -378,7 +424,6 @@ namespace ProblemSolvingPratice
             bool isLLCyclic = HasCycle(node1);
 
             Console.WriteLine($"Linklist head {nameof(node1)} has cycle: {isLLCyclic}");
-            */
 
             Console.WriteLine("------------------------------------------------------------");
 
@@ -386,6 +431,20 @@ namespace ProblemSolvingPratice
             int peak = FindPeakElement(arr);
 
             Console.WriteLine($"Peak Element of {nameof(arr)} is at index: {peak}");
+            */
+            //int[] arr = { 2, 7, 11, 15 };
+            //int[] twoSumIndex = TwoSum(arr, 9);
+
+            int[] arr = { 2, 3, 4 };
+            int[] twoSumIndex = TwoSum(arr, 6);
+
+            Console.WriteLine($"Array: {nameof(arr)} has target on indexes: [{twoSumIndex[0]}, {twoSumIndex[1]}]");
+
+            int[] arr1 = { 2, 7, 11, 15 };
+            int[] simpleTwoSumIndex = TwoSumSimple(arr1, 9);
+            Console.WriteLine($"Array: {nameof(arr1)} has target on indexes: [{simpleTwoSumIndex[0]}, {simpleTwoSumIndex[1]}]");
+
+
 
         }
     }
