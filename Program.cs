@@ -341,8 +341,39 @@ namespace ProblemSolvingPratice
             return new int[] { -1, -1 }; // Return a default value if no solution exists
         }
 
+        // LeetCode 283. Move Zeroes
+        // https://leetcode.com/problems/move-zeroes/description/
+
+        public static void MoveZeroes(int[] nums)
+        {
+            int count = 0;
+
+            for(int i = 0; i < nums.Length; i++)
+            {
+                if (nums[i] != 0)
+                {
+                    int temp = nums[i];
+                    nums[i] = nums[count];
+                    nums[count] = temp;
+
+                    count++;
+                }
+            }
+        }
+
         static void Main(string[] args)
         {
+
+            int[] arr = { 0, 1, 0, 3, 12 };
+            MoveZeroes(arr);
+
+            Console.Write("Array after moving zeros: ");
+            foreach (int n in arr)
+            {
+                Console.Write($"{n} ");
+            }
+            Console.WriteLine("------------------------------------------------------------");
+
             /*
             string str = " qadeer ";
             string result = string.Empty;
@@ -431,7 +462,7 @@ namespace ProblemSolvingPratice
             int peak = FindPeakElement(arr);
 
             Console.WriteLine($"Peak Element of {nameof(arr)} is at index: {peak}");
-            */
+
             //int[] arr = { 2, 7, 11, 15 };
             //int[] twoSumIndex = TwoSum(arr, 9);
 
@@ -443,6 +474,12 @@ namespace ProblemSolvingPratice
             int[] arr1 = { 2, 7, 11, 15 };
             int[] simpleTwoSumIndex = TwoSumSimple(arr1, 9);
             Console.WriteLine($"Array: {nameof(arr1)} has target on indexes: [{simpleTwoSumIndex[0]}, {simpleTwoSumIndex[1]}]");
+            */
+
+
+
+
+
 
 
 
