@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace ProblemSolvingPratice
@@ -361,9 +362,30 @@ namespace ProblemSolvingPratice
             }
         }
 
+        // Leetcode 169: Majority Element
+        // https://leetcode.com/problems/majority-element/
+        public static int MajorityElement(int[] nums)
+        {
+            int compareOccurance = nums.Length / 2;
+            // creating a HashMap using Dictionary in C# to store the count
+            Dictionary<int, int> countMap = new Dictionary<int, int>();
+
+            foreach(int num in nums)
+            {
+                if (countMap.ContainsKey(num))
+                    countMap[num]++;
+                else
+                    countMap[num] = 1;
+            }
+
+            return countMap.Where(e => e.Value > compareOccurance).Select(ele => ele.Key).FirstOrDefault();
+        }
         static void Main(string[] args)
         {
 
+            int[] arr = { 2, 2, 1, 1, 1, 2, 2 };
+            Console.Write($"Majority Element is: {MajorityElement(arr)}");
+            /*
             int[] arr = { 0, 1, 0, 3, 12 };
             MoveZeroes(arr);
 
@@ -374,7 +396,6 @@ namespace ProblemSolvingPratice
             }
             Console.WriteLine("------------------------------------------------------------");
 
-            /*
             string str = " qadeer ";
             string result = string.Empty;
             foreach (char c in str)
