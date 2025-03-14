@@ -57,37 +57,6 @@ namespace ProblemSolvingPratice
             }
             Console.WriteLine($"Revered String: {reverseString}");
         }
-
-        public static void reverseStringWithoutReversingItsWords(string str)
-        {
-            int start = 0, end = str.Length - 1;
-            string result = string.Empty;
-            string word = string.Empty;
-
-            for (int i = end; i >= start; i--)
-            {
-                if (str[i] != ' ')
-                {
-                    word = str[i] + word;
-                }
-                else
-                {
-                    if (!string.IsNullOrEmpty(word))
-                    {
-                        result += word + " ";
-                        word = string.Empty;
-                    }
-                }
-            }
-
-            if (!string.IsNullOrEmpty(word))
-            {
-                result += word;
-            }
-
-            Console.WriteLine($"Reversed string without reversing its words: '{result.Trim()}'");
-        }
-
         public static int[] sortArrayInSingleLoop(int[] arr)
         {
             for (int i = 0; i < arr.Length - 1; i++)
@@ -349,7 +318,7 @@ namespace ProblemSolvingPratice
         {
             int count = 0;
 
-            for(int i = 0; i < nums.Length; i++)
+            for (int i = 0; i < nums.Length; i++)
             {
                 if (nums[i] != 0)
                 {
@@ -370,7 +339,7 @@ namespace ProblemSolvingPratice
             // creating a HashMap using Dictionary in C# to store the count
             Dictionary<int, int> countMap = new Dictionary<int, int>();
 
-            foreach(int num in nums)
+            foreach (int num in nums)
             {
                 if (countMap.ContainsKey(num))
                     countMap[num]++;
@@ -408,10 +377,8 @@ namespace ProblemSolvingPratice
 
             //string str = "  This is a book   ";
             string str1 = "Some String";
-            string str2 = "This is a book";
             removeLeadingAndTrailingSpace(str);
             reverseString(str1);
-            reverseStringWithoutReversingItsWords(str2);
 
             int[] arr = { 7, 8, 5, 2, 1 };
             int[] sortedArray = sortArrayInSingleLoop(arr);
