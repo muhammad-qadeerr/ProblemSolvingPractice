@@ -42,21 +42,6 @@ namespace ProblemSolvingPratice
             //string result = str1.Trim();
             Console.WriteLine($"After removing leading and traling spaces: {result}");
         }
-
-        public static void reverseString(string str)
-        {
-            Stack stk = new Stack();
-            foreach (char c in str)
-            {
-                stk.Push(c);
-            }
-            string reverseString = string.Empty;
-            foreach (char c in str)
-            {
-                reverseString += stk.Pop();
-            }
-            Console.WriteLine($"Revered String: {reverseString}");
-        }
         public static int[] sortArrayInSingleLoop(int[] arr)
         {
             for (int i = 0; i < arr.Length - 1; i++)
@@ -378,7 +363,6 @@ namespace ProblemSolvingPratice
             //string str = "  This is a book   ";
             string str1 = "Some String";
             removeLeadingAndTrailingSpace(str);
-            reverseString(str1);
 
             int[] arr = { 7, 8, 5, 2, 1 };
             int[] sortedArray = sortArrayInSingleLoop(arr);
