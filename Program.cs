@@ -76,21 +76,6 @@ namespace ProblemSolvingPratice
             int factorial = num * findFactorialRecursively(num - 1);
             return factorial;
         }
-
-        public static int missingNoInSortedArray(int[] arr)
-        {
-            for (int i = 0; i < arr.Length - 1; i++)
-            {
-                if (arr[i] + 1 != arr[i + 1])
-                {
-                    return arr[i] + 1;
-                }
-            }
-
-            throw new Exception("No missing number in the array.");
-        }
-
-
         public static int climbStairs(int n)
         {
             if (n <= 2) return n;
@@ -318,11 +303,6 @@ namespace ProblemSolvingPratice
             int num = 3;
             int factorial = findFactorialRecursively(num);
             Console.WriteLine($"Factorial of the number {num} is: {factorial}");
-
-            Console.WriteLine("---------------------------------------------------------");
-            int[] arr1 = { 1, 2, 4, 5, 6 };
-            int missingNum = missingNoInSortedArray(arr1);
-            Console.WriteLine($"Missing num in array is: {missingNum}");
 
             Console.WriteLine("---------------------------------------------------------");
 
