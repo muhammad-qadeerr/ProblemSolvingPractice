@@ -56,26 +56,6 @@ namespace ProblemSolvingPratice
             }
             return arr;
         }
-        public static int findFactorialUsingLoop(int num)
-        {
-            int factorial = 1;
-
-            for (int i = 1; i <= num; i++)
-            {
-                factorial *= i;
-            }
-
-            return factorial;
-        }
-
-        public static int findFactorialRecursively(int num)
-        {
-            if (num == 0 || num == 1)
-                return 1;
-
-            int factorial = num * findFactorialRecursively(num - 1);
-            return factorial;
-        }
         public static int climbStairs(int n)
         {
             if (n <= 2) return n;
@@ -300,12 +280,6 @@ namespace ProblemSolvingPratice
             int[] arr = { 7, 8, 5, 2, 1 };
             int[] sortedArray = sortArrayInSingleLoop(arr);
             Console.WriteLine($"Reversed Array: {string.Join(", ", sortedArray)}");
-            int num = 3;
-            int factorial = findFactorialRecursively(num);
-            Console.WriteLine($"Factorial of the number {num} is: {factorial}");
-
-            Console.WriteLine("---------------------------------------------------------");
-
             int steps = climbStairs(4);
             Console.WriteLine($"No of Steps are: {steps}");
 
