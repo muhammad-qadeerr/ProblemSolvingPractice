@@ -159,30 +159,6 @@ namespace ProblemSolvingPratice
             }
             return false;
         }
-
-        // Leetcode 162: Find Peak Element
-        // https://leetcode.com/problems/find-peak-element/description/
-
-        public static int FindPeakElement(int[] nums)
-        {
-            int min = 0;
-            int max = nums.Length - 1;
-            while (min < max)
-            {
-                int mid = (min + max) / 2;
-                if (nums[mid] < nums[mid + 1])
-                {
-                    min = mid + 1;
-                }
-                else
-                {
-                    max = mid;
-                }
-
-            }
-            return min;
-        }
-
         // Leetcode 167 - Two Sum II (Input Array is Sorted)
         // https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/
         public static int[] TwoSum(int[] numbers, int target)
@@ -293,12 +269,6 @@ namespace ProblemSolvingPratice
             Console.WriteLine($"Linklist head {nameof(node1)} has cycle: {isLLCyclic}");
 
             Console.WriteLine("------------------------------------------------------------");
-
-            int[] arr = {1, 2, 3, 1};
-            int peak = FindPeakElement(arr);
-
-            Console.WriteLine($"Peak Element of {nameof(arr)} is at index: {peak}");
-
             //int[] arr = { 2, 7, 11, 15 };
             //int[] twoSumIndex = TwoSum(arr, 9);
 
