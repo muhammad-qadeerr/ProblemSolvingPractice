@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace ProblemSolvingPratice
@@ -210,20 +211,46 @@ namespace ProblemSolvingPratice
         // https://leetcode.com/problems/reverse-string/
         public static string ReverseString(string str)
         {
+            if(string.IsNullOrEmpty(str)) return string.Empty;
             char[] chars = str.ToCharArray();
             int left = 0, right = str.Length - 1;
 
             while (left < right)
             {
                 char temp = chars[left];
-                chars[left] = str[right];
+                chars[left] = chars[right];
                 chars[right] = temp;
 
                 left++; right--;
             }
             return new string(chars);
         }
-        
+
+        // Leetcode 345. Reverse vowel in a String
+        // https://leetcode.com/problems/reverse-vowels-of-a-string/
+        public static string ReverseVowelOfAString(string str)
+        {
+            if (string.IsNullOrEmpty(str)) return string.Empty;
+            char[] chars = str.ToCharArray();
+            int left = 0, right = str.Length - 1;
+
+            string vowels = "aeiouAEIOU";
+            while (left < right)
+            {
+                while (left < right  && !vowels.Contains(chars[left]))
+                { left++; }
+                while(left < right && !vowels.Contains(chars[right]))
+                { right--; }
+               
+                char temp = chars[left];
+                chars[left] = chars[right];
+                chars[right] = temp;
+
+                left++; right--;
+            }
+            return new string(chars);
+        }
+
         static void Main(string[] args)
         {
             /*
@@ -304,7 +331,10 @@ namespace ProblemSolvingPratice
             */
 
             string test = "Hello";
-            Console.WriteLine(ReverseString(test);
+            Console.WriteLine($"Reverse of string \"{test}\" is: \"{ReverseString(test)}\"");
+
+            string test1 = "leetcode";
+            Console.WriteLine($"String \"{test1}\" after reversing its vowel is: \"{ReverseVowelOfAString(test1)}\"");
         }
     }
 }
