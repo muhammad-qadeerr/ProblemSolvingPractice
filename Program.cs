@@ -95,7 +95,8 @@ namespace ProblemSolvingPratice
             }
         }
 
-        //125. Valid Palindrome
+        // 125. Valid Palindrome
+        // https://leetcode.com/problems/valid-palindrome/description/
         public static bool IsPalindrome(string s)
         {
             s = Regex.Replace(s, "[^a-zA-Z0-9]", "").ToLower();
@@ -185,6 +186,7 @@ namespace ProblemSolvingPratice
         }
 
         // Leetcode 1: Simple Two Sum
+        // https://leetcode.com/problems/two-sum/description/
         public static int[] TwoSumSimple(int[] nums, int target)
         {
             Dictionary<int, int> map = new Dictionary<int, int>();
@@ -203,6 +205,25 @@ namespace ProblemSolvingPratice
 
             return new int[] { -1, -1 }; // Return a default value if no solution exists
         }
+
+        // Leetcode 344. Reverse String
+        // https://leetcode.com/problems/reverse-string/
+        public static string ReverseString(string str)
+        {
+            char[] chars = str.ToCharArray();
+            int left = 0, right = str.Length - 1;
+
+            while (left < right)
+            {
+                char temp = chars[left];
+                chars[left] = str[right];
+                chars[right] = temp;
+
+                left++; right--;
+            }
+            return new string(chars);
+        }
+        
         static void Main(string[] args)
         {
             /*
@@ -282,13 +303,8 @@ namespace ProblemSolvingPratice
             Console.WriteLine($"Array: {nameof(arr1)} has target on indexes: [{simpleTwoSumIndex[0]}, {simpleTwoSumIndex[1]}]");
             */
 
-
-
-
-
-
-
-
+            string test = "Hello";
+            Console.WriteLine(ReverseString(test);
         }
     }
 }
