@@ -211,7 +211,7 @@ namespace ProblemSolvingPratice
         // https://leetcode.com/problems/reverse-string/
         public static string ReverseString(string str)
         {
-            if(string.IsNullOrEmpty(str)) return string.Empty;
+            if (string.IsNullOrEmpty(str)) return string.Empty;
             char[] chars = str.ToCharArray();
             int left = 0, right = str.Length - 1;
 
@@ -237,11 +237,11 @@ namespace ProblemSolvingPratice
             string vowels = "aeiouAEIOU";
             while (left < right)
             {
-                while (left < right  && !vowels.Contains(chars[left]))
+                while (left < right && !vowels.Contains(chars[left]))
                 { left++; }
-                while(left < right && !vowels.Contains(chars[right]))
+                while (left < right && !vowels.Contains(chars[right]))
                 { right--; }
-               
+
                 char temp = chars[left];
                 chars[left] = chars[right];
                 chars[right] = temp;
@@ -250,6 +250,20 @@ namespace ProblemSolvingPratice
             }
             return new string(chars);
         }
+
+        // LeetCode 121 - Best Time to Buy and Sell Stock -- Solved using Kandan Alogoritm
+        //https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/
+        public static int BestTimeToBuyStock(int[] prices)
+        {
+            int buy = prices[0], profit = 0;
+            for (int i = 0; i < prices.Length; i++)
+            {
+                if (prices[i] < buy) { buy = prices[i]; }
+                else if (prices[i] - buy > profit) { profit = prices[i] - buy; }
+            }
+            return profit;
+        }
+
 
         static void Main(string[] args)
         {
@@ -328,13 +342,16 @@ namespace ProblemSolvingPratice
             int[] arr1 = { 2, 7, 11, 15 };
             int[] simpleTwoSumIndex = TwoSumSimple(arr1, 9);
             Console.WriteLine($"Array: {nameof(arr1)} has target on indexes: [{simpleTwoSumIndex[0]}, {simpleTwoSumIndex[1]}]");
-            */
 
             string test = "Hello";
             Console.WriteLine($"Reverse of string \"{test}\" is: \"{ReverseString(test)}\"");
 
             string test1 = "leetcode";
             Console.WriteLine($"String \"{test1}\" after reversing its vowel is: \"{ReverseVowelOfAString(test1)}\"");
+            */
+
+            int[] stockPrices = { 7, 1, 5, 3, 6, 4 };
+            Console.WriteLine($"Maximum profit gained during transaction = {BestTimeToBuyStock(stockPrices)}");
         }
     }
 }
