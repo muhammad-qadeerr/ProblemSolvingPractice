@@ -264,6 +264,19 @@ namespace ProblemSolvingPratice
             return profit;
         }
 
+        // LeetCode 392: Is String a Subsequence
+        // https://leetcode.com/problems/is-subsequence/
+        public static bool IsGivenStringASubSequenceOfOther(string s, string t)
+        {
+            int i = 0, j = 0;
+            while (i < s.Length && j < t.Length)
+            {
+                if (s[i] == t[j]) i++;
+                j++;
+            }
+            return i == s.Length;
+        }
+
 
         static void Main(string[] args)
         {
@@ -348,10 +361,14 @@ namespace ProblemSolvingPratice
 
             string test1 = "leetcode";
             Console.WriteLine($"String \"{test1}\" after reversing its vowel is: \"{ReverseVowelOfAString(test1)}\"");
-            */
 
             int[] stockPrices = { 7, 1, 5, 3, 6, 4 };
             Console.WriteLine($"Maximum profit gained during transaction = {BestTimeToBuyStock(stockPrices)}");
+            */
+
+            string t = "ahbgdc";
+            string s = "axc";
+            Console.WriteLine($"IsGivenStringASubSequenceOfOther => {IsGivenStringASubSequenceOfOther(s, t)}");
         }
     }
 }
