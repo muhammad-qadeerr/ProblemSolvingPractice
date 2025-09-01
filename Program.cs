@@ -277,6 +277,26 @@ namespace ProblemSolvingPratice
             return i == s.Length;
         }
 
+        // Leetcode 189. Rotate Array
+        // https://leetcode.com/problems/rotate-array/
+        public static void RotateArray(int[] nums, int steps)
+        {
+            ReverseArrayFromSpecificIndexes(nums, 0, nums.Length - 1);
+            ReverseArrayFromSpecificIndexes(nums, 0, steps - 1);
+            ReverseArrayFromSpecificIndexes(nums, steps, nums.Length - 1);
+        }
+        private static void ReverseArrayFromSpecificIndexes(int[] arr, int left, int right)
+        {
+            while (left < right)
+            {
+                int temp = arr[left];
+                arr[left] = arr[right];
+                arr[right] = temp;
+
+                left++;
+                right--;
+            }
+        }
 
         static void Main(string[] args)
         {
@@ -364,11 +384,20 @@ namespace ProblemSolvingPratice
 
             int[] stockPrices = { 7, 1, 5, 3, 6, 4 };
             Console.WriteLine($"Maximum profit gained during transaction = {BestTimeToBuyStock(stockPrices)}");
-            */
 
             string t = "ahbgdc";
             string s = "axc";
             Console.WriteLine($"IsGivenStringASubSequenceOfOther => {IsGivenStringASubSequenceOfOther(s, t)}");
+            */
+
+
+            int[] arr = { 1, 2, 3, 4, 5, 6, 7 };
+            RotateArray(arr, 3);
+            Console.WriteLine("Array after rotation");
+            foreach (int i in arr)
+            {
+                Console.WriteLine(i);
+            }
         }
     }
 }
