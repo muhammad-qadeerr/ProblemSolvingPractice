@@ -281,7 +281,7 @@ namespace ProblemSolvingPratice
         // https://leetcode.com/problems/rotate-array/
         public static void RotateArray(int[] nums, int k)
         {
-            if(nums == null || nums.Length == 0) return;
+            if (nums == null || nums.Length == 0) return;
             k = k % nums.Length;
             if (k == 0) return;
             ReverseArrayFromSpecificIndexes(nums, 0, nums.Length - 1);
@@ -295,9 +295,7 @@ namespace ProblemSolvingPratice
                 int temp = arr[left];
                 arr[left] = arr[right];
                 arr[right] = temp;
-
-                left++;
-                right--;
+                left++; right--;
             }
         }
 
