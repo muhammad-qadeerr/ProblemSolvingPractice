@@ -279,11 +279,14 @@ namespace ProblemSolvingPratice
 
         // Leetcode 189. Rotate Array
         // https://leetcode.com/problems/rotate-array/
-        public static void RotateArray(int[] nums, int steps)
+        public static void RotateArray(int[] nums, int k)
         {
+            if(nums == null || nums.Length == 0) return;
+            k = k % nums.Length;
+            if (k == 0) return;
             ReverseArrayFromSpecificIndexes(nums, 0, nums.Length - 1);
-            ReverseArrayFromSpecificIndexes(nums, 0, steps - 1);
-            ReverseArrayFromSpecificIndexes(nums, steps, nums.Length - 1);
+            ReverseArrayFromSpecificIndexes(nums, 0, k - 1);
+            ReverseArrayFromSpecificIndexes(nums, k, nums.Length - 1);
         }
         private static void ReverseArrayFromSpecificIndexes(int[] arr, int left, int right)
         {
