@@ -321,6 +321,26 @@ namespace ProblemSolvingPratice
             }
         }
 
+        // Leetcode 14. Longest Common Prefix
+        // https://leetcode.com/problems/longest-common-prefix/description/
+        public static string FindLongestCommonPrefix(string[] strs)
+        {
+            if (strs == null || strs.Length == 0) return string.Empty;
+            string prefix = strs[0];
+            for(int i = 0; i < prefix.Length; i++)
+            {
+                char c = prefix[i];
+                for(int j = 1; j < strs.Length; j++)
+                {
+                    if (i >= strs[j].Length || strs[j][i] != c)
+                    {
+                        return prefix.Substring(0, i);
+                    }
+                }
+            }
+            return prefix;
+        }
+
         static void Main(string[] args)
         {
             /*
@@ -419,11 +439,13 @@ namespace ProblemSolvingPratice
             {
                 Console.WriteLine(i);
             }
-            */
 
             string faultKeyBoardString = "poiinter";
             Console.WriteLine($"String \"{faultKeyBoardString}\" after faulty keyboard input is: \"{FaultyKeyboardFinalString(faultKeyBoardString)}\"");
+            */
 
+            string[] strs = { "flower", "flow", "flight" };
+            Console.WriteLine($"Longest Common Prefix is: \"{FindLongestCommonPrefix(strs)}\"");
         }
     }
 }
