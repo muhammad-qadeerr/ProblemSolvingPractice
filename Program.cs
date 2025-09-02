@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 
 namespace ProblemSolvingPratice
@@ -251,6 +253,26 @@ namespace ProblemSolvingPratice
             return new string(chars);
         }
 
+        // LeetCode 2810. Faulty Keyboard
+        // https://leetcode.com/problems/faulty-keyboard/description/
+        public static string FaultyKeyboardFinalString(string str)
+        {
+            string result = string.Empty;
+
+            foreach (char c in str)
+            {
+                if (c == 'i')
+                {
+                    result = ReverseString(result);
+                }
+                else
+                {
+                    result += c;
+                }
+            }
+            return result;
+        }
+
         // LeetCode 121 - Best Time to Buy and Sell Stock -- Solved using Kandan Alogoritm
         //https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/
         public static int BestTimeToBuyStock(int[] prices)
@@ -399,6 +421,11 @@ namespace ProblemSolvingPratice
             {
                 Console.WriteLine(i);
             }
+            */
+
+            string faultKeyBoardString = "poiinter";
+            Console.WriteLine($"String \"{faultKeyBoardString}\" after faulty keyboard input is: \"{FaultyKeyboardFinalString(faultKeyBoardString)}\"");
+
         }
     }
 }
