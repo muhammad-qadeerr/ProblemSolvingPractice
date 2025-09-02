@@ -411,8 +411,6 @@ namespace ProblemSolvingPratice
             string t = "ahbgdc";
             string s = "axc";
             Console.WriteLine($"IsGivenStringASubSequenceOfOther => {IsGivenStringASubSequenceOfOther(s, t)}");
-            */
-
 
             int[] arr = { 1, 2, 3, 4, 5, 6, 7 };
             RotateArray(arr, 3);
