@@ -327,10 +327,10 @@ namespace ProblemSolvingPratice
         {
             if (strs == null || strs.Length == 0) return string.Empty;
             string prefix = strs[0];
-            for(int i = 0; i < prefix.Length; i++)
+            for (int i = 0; i < prefix.Length; i++)
             {
                 char c = prefix[i];
-                for(int j = 1; j < strs.Length; j++)
+                for (int j = 1; j < strs.Length; j++)
                 {
                     if (i >= strs[j].Length || strs[j][i] != c)
                     {
@@ -339,6 +339,18 @@ namespace ProblemSolvingPratice
                 }
             }
             return prefix;
+        }
+
+        // Leetcode 217: Contains Duplicate
+        // https://leetcode.com/problems/contains-duplicate/description/
+        public static bool ArrayContainsDuplicate(int[] nums)
+        {
+            var uniqueElements = new HashSet<int>();  // HashSet always contain unique elements
+            foreach (int ele in nums)
+            {
+                uniqueElements.Add(ele);
+            }
+            return uniqueElements.Count < nums.Length;
         }
 
         static void Main(string[] args)
@@ -442,10 +454,18 @@ namespace ProblemSolvingPratice
 
             string faultKeyBoardString = "poiinter";
             Console.WriteLine($"String \"{faultKeyBoardString}\" after faulty keyboard input is: \"{FaultyKeyboardFinalString(faultKeyBoardString)}\"");
-            */
+
+            string[] strs = { "dog", "racecar", "car" };
+            Console.WriteLine($"Longest Common Prefix is: \"{FindLongestCommonPrefix(strs)}\"");
 
             string[] strs = { "flower", "flow", "flight" };
-            Console.WriteLine($"Longest Common Prefix is: \"{FindLongestCommonPrefix(strs)}\"");
+            Array.Sort(strs);
+            foreach(string str in strs) Console.WriteLine(str);
+            */
+
+            int[] nums = { 1, 2, 3, 4 };
+            Console.Write(ArrayContainsDuplicate(nums));
+
         }
     }
 }
