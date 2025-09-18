@@ -345,12 +345,12 @@ namespace ProblemSolvingPratice
         // https://leetcode.com/problems/contains-duplicate/description/
         public static bool ArrayContainsDuplicate(int[] nums)
         {
-            var uniqueElements = new HashSet<int>();  // HashSet always contain unique elements
-            foreach (int ele in nums)
-            {
-                uniqueElements.Add(ele);
-            }
-            return uniqueElements.Count < nums.Length;
+            //var uniqueElements = new HashSet<int>();  // HashSet always contain unique elements
+            //foreach (int ele in nums)
+            //{
+            //    uniqueElements.Add(ele);
+            //}
+            return new HashSet<int>(nums).Count < nums.Length;
         }
 
         static void Main(string[] args)
