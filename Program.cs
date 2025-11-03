@@ -353,6 +353,39 @@ namespace ProblemSolvingPratice
             return new HashSet<int>(nums).Count < nums.Length;
         }
 
+        // 242. Valid Anagram
+        // https://leetcode.com/problems/valid-anagram/description/
+        public static bool IsAnagram(string s, string t)
+        {
+            if (s.Length != t.Length) return false;
+
+            var freqS = new Dictionary<char, int>();
+            var freqT = new Dictionary<char, int>();
+
+            foreach (char c in s)
+            {
+                if (freqS.ContainsKey(c))
+                    freqS[c]++;
+                else
+                    freqS[c] = 1;
+            }
+            foreach (char c in t)
+            {
+                if (freqT.ContainsKey(c))
+                    freqT[c]++;
+                else
+                    freqT[c] = 1;
+            }
+            foreach (var kvp in freqS)
+            {
+                char key = kvp.Key;
+                int value = kvp.Value;
+                if (!freqT.TryGetValue(kvp.Key, out int count) || count != kvp.Value)
+                    return false;
+            }
+            return true;
+        }
+
         static void Main(string[] args)
         {
             /*
@@ -461,11 +494,15 @@ namespace ProblemSolvingPratice
             string[] strs = { "flower", "flow", "flight" };
             Array.Sort(strs);
             foreach(string str in strs) Console.WriteLine(str);
-            */
 
             int[] nums = { 1, 2, 3, 4 };
             Console.Write(ArrayContainsDuplicate(nums));
+            */
 
+
+            string s = "anagram";
+            string t = "nagaeam";
+            Console.WriteLine($"Is {s} an anagram of {t}: {(IsAnagram(s, t) ? "true" : "false")}");
         }
     }
 }
