@@ -386,6 +386,29 @@ namespace ProblemSolvingPratice
             return true;
         }
 
+        // Leetcode 49: Group Anagrams
+        // https://leetcode.com/problems/group-anagrams/
+        public static IList<IList<string>> GroupAnagrams(string[] strs)
+        {
+            //Input: strs = ["eat", "tea", "tan", "ate", "nat", "bat"]
+            //Output: [["bat"],["nat", "tan"],["ate", "eat", "tea"]]
+
+            var anagramMap = new Dictionary<string, List<string>>();
+
+            foreach (var str in strs)
+            {
+                var charArray = str.ToCharArray();
+                Array.Sort(charArray);
+                var sortedStr = new string(charArray);
+                if (!anagramMap.ContainsKey(sortedStr))
+                {
+                    anagramMap[sortedStr] = new List<string>();
+                }
+                anagramMap[sortedStr].Add(str);
+            }
+            return anagramMap.Values.ToList<IList<string>>();
+        }
+
         static void Main(string[] args)
         {
             /*
@@ -497,12 +520,19 @@ namespace ProblemSolvingPratice
 
             int[] nums = { 1, 2, 3, 4 };
             Console.Write(ArrayContainsDuplicate(nums));
-            */
-
 
             string s = "anagram";
             string t = "nagaeam";
             Console.WriteLine($"Is {s} an anagram of {t}: {(IsAnagram(s, t) ? "true" : "false")}");
+            */
+
+            var strs = new string[] { "eat", "tea", "tan", "ate", "nat", "bat" };
+            var groupedAnagrams = GroupAnagrams(strs);
+            Console.WriteLine("Grouped Anagrams:");
+            foreach (var group in groupedAnagrams)
+            {
+                Console.WriteLine($"[{string.Join(", ", group)}]");
+            }
         }
     }
 }
