@@ -1,315 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
 namespace ProblemSolvingPratice;
-public class ListNode
-{
-    public int val;
-    public ListNode next;
-    public ListNode(int x)
-    {
-        val = x;
-        next = null;
-    }
-}
 internal class Program
-{
-    public static void removeLeadingAndTrailingSpace(string str1)
-    {
-        int start = 0;
-        int end = str1.Length - 1;
-        string result = string.Empty;
-        while (start <= end && str1[start] == ' ') start++;
-        while (end >= start && str1[end] == ' ') end--;
-
-
-        int index = 0;
-        foreach (char c in str1)
-        {
-            if (index >= start && index <= end)
-            {
-                result += c;
-            }
-            index++;
-        }
-
-        // Alternate Solutions
-        //result = str1.Substring(start, end - start + 1);
-        //string result = str1.Trim();
-        Console.WriteLine($"After removing leading and traling spaces: {result}");
-    }
-    public static int[] sortArrayInSingleLoop(int[] arr)
-    {
-        for (int i = 0; i < arr.Length - 1; i++)
-        {
-            if (arr[i] > arr[i + 1])
-            {
-                int temp = arr[i];
-                arr[i] = arr[i + 1];
-                arr[i + 1] = temp;
-                i = -1;
-            }
-        }
-        return arr;
-    }
-    public static int climbStairs(int n)
-    {
-        if (n <= 2) return n;
-        int prev2 = 1, prev1 = 2;
-        for (int i = 3; i <= n; i++)
-        {
-            int curr = prev1 + prev2;
-            prev2 = prev1;
-            prev1 = curr;
-        }
-        return prev1;
-    }
-
-    // 125. Valid Palindrome
-    // https://leetcode.com/problems/valid-palindrome/description/
-    public static bool IsPalindrome(string s)
-    {
-        s = Regex.Replace(s, "[^a-zA-Z0-9]", "").ToLower();
-        Stack<char> stack = new Stack<char>();
-
-        string result = string.Empty;
-
-        foreach (char c in s)
-        {
-            stack.Push(c);
-        }
-
-        foreach (char c in s)
-        {
-            if (stack.Pop() != c)
-            {
-                return false;
-            }
-        }
-
-        return true;
-
-    }
-    // Leetcode: 3. Longest Substring Without Repeating Characters
-    // https://leetcode.com/problems/longest-substring-without-repeating-characters/description/
-
-    public static int LengthOfLongestSubstring(string s)
-    {
-        HashSet<char> charSet = new HashSet<char>();
-        int left = 0, maxLength = 0;
-        for (int right = 0; right < s.Length; right++)
-        {
-            while (charSet.Contains(s[right]))
-            {
-                charSet.Remove(s[left]);
-                left++;
-            }
-            charSet.Add(s[right]);
-            maxLength = Math.Max(maxLength, right - left + 1);
-        }
-        return maxLength;
-    }
-
-    // Leetcode 141. Linked List Cycle
-    // https://leetcode.com/problems/linked-list-cycle/description/
-    public static bool HasCycle(ListNode head)
-    {
-        if (head == null || head.next == null)
-            return false;
-
-        ListNode slow = head;
-        ListNode fast = head;
-
-        while (fast != null && fast.next != null)
-        {
-            slow = slow.next;
-            fast = fast.next.next;
-
-            if (slow == fast)
-                return true;
-        }
-        return false;
-    }
-    // Leetcode 167 - Two Sum II (Input Array is Sorted)
-    // https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/
-    public static int[] TwoSum(int[] numbers, int target)
-    {
-        int start = 0, end = numbers.Length - 1;
-
-        while (start < end)
-        {
-            if (numbers[start] + numbers[end] == target)
-            {
-                return new int[] { start + 1, end + 1 };
-            }
-            else if (numbers[start] + numbers[end] > target)
-            {
-                end--;
-            }
-            else
-            {
-                start++;
-            }
-        }
-        return new int[] { -1, -1 };
-
-    }
-
-    // Leetcode 1: Simple Two Sum
-    // https://leetcode.com/problems/two-sum/description/
-    public static int[] TwoSumSimple(int[] nums, int target)
-    {
-        Dictionary<int, int> map = new Dictionary<int, int>();
-
-        for (int i = 0; i < nums.Length; i++)
-        {
-            int complement = target - nums[i];
-
-            if (map.ContainsKey(complement))
-            {
-                return new int[] { map[complement], i };
-            }
-
-            map[nums[i]] = i;
-        }
-
-        return new int[] { -1, -1 }; // Return a default value if no solution exists
-    }
-
-    // Leetcode 344. Reverse String
-    // https://leetcode.com/problems/reverse-string/
-    public static string ReverseString(string str)
-    {
-        if (string.IsNullOrEmpty(str)) return string.Empty;
-        char[] chars = str.ToCharArray();
-        int left = 0, right = str.Length - 1;
-
-        while (left < right)
-        {
-            char temp = chars[left];
-            chars[left] = chars[right];
-            chars[right] = temp;
-
-            left++; right--;
-        }
-        return new string(chars);
-    }
-
-    // Leetcode 345. Reverse vowel in a String
-    // https://leetcode.com/problems/reverse-vowels-of-a-string/
-    public static string ReverseVowelOfAString(string str)
-    {
-        if (string.IsNullOrEmpty(str)) return string.Empty;
-        char[] chars = str.ToCharArray();
-        int left = 0, right = str.Length - 1;
-
-        string vowels = "aeiouAEIOU";
-        while (left < right)
-        {
-            while (left < right && !vowels.Contains(chars[left]))
-            { left++; }
-            while (left < right && !vowels.Contains(chars[right]))
-            { right--; }
-
-            char temp = chars[left];
-            chars[left] = chars[right];
-            chars[right] = temp;
-
-            left++; right--;
-        }
-        return new string(chars);
-    }
-
-    // LeetCode 2810. Faulty Keyboard
-    // https://leetcode.com/problems/faulty-keyboard/description/
-    public static string FaultyKeyboardFinalString(string str)
-    {
-        string result = string.Empty;
-
-        foreach (char c in str)
-        {
-            if (c == 'i')
-            {
-                result = ReverseString(result);
-            }
-            else
-            {
-                result += c;
-            }
-        }
-        return result;
-    }
-
-    // LeetCode 121 - Best Time to Buy and Sell Stock -- Solved using Kandan Alogoritm
-    //https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/
-    public static int BestTimeToBuyStock(int[] prices)
-    {
-        int buy = prices[0], profit = 0;
-        for (int i = 0; i < prices.Length; i++)
-        {
-            if (prices[i] < buy) { buy = prices[i]; }
-            else if (prices[i] - buy > profit) { profit = prices[i] - buy; }
-        }
-        return profit;
-    }
-
-    // LeetCode 392: Is String a Subsequence
-    // https://leetcode.com/problems/is-subsequence/
-    public static bool IsGivenStringASubSequenceOfOther(string s, string t)
-    {
-        int i = 0, j = 0;
-        while (i < s.Length && j < t.Length)
-        {
-            if (s[i] == t[j]) i++;
-            j++;
-        }
-        return i == s.Length;
-    }
-
-    // Leetcode 189. Rotate Array
-    // https://leetcode.com/problems/rotate-array/
-    public static void RotateArray(int[] nums, int k)
-    {
-        if (nums == null || nums.Length == 0) return;
-        k = k % nums.Length;
-        if (k == 0) return;
-        ReverseArrayFromSpecificIndexes(nums, 0, nums.Length - 1);
-        ReverseArrayFromSpecificIndexes(nums, 0, k - 1);
-        ReverseArrayFromSpecificIndexes(nums, k, nums.Length - 1);
-    }
-    private static void ReverseArrayFromSpecificIndexes(int[] arr, int left, int right)
-    {
-        while (left < right)
-        {
-            int temp = arr[left];
-            arr[left] = arr[right];
-            arr[right] = temp;
-            left++; right--;
-        }
-    }
-
-    // Leetcode 14. Longest Common Prefix
-    // https://leetcode.com/problems/longest-common-prefix/description/
-    public static string FindLongestCommonPrefix(string[] strs)
-    {
-        if (strs == null || strs.Length == 0) return string.Empty;
-        string prefix = strs[0];
-        for (int i = 0; i < prefix.Length; i++)
-        {
-            char c = prefix[i];
-            for (int j = 1; j < strs.Length; j++)
-            {
-                if (i >= strs[j].Length || strs[j][i] != c)
-                {
-                    return prefix.Substring(0, i);
-                }
-            }
-        }
-        return prefix;
-    }
-
-
+{ 
     static void Main(string[] args)
     {
         var mergeArray = new Leetcode.Problem088.MergeSortedArrays();
@@ -320,7 +12,7 @@ internal class Program
         Console.WriteLine("Merged Array: " + string.Join(", ", nums1));
 
         var groupAnagrams = new Leetcode.Problem049.GroupAnagrams();
-        Console.WriteLine($"============================ {groupAnagrams.GetProblemTitle()} ============================");
+        Console.WriteLine($"\n============================ {groupAnagrams.GetProblemTitle()} ============================");
         var strs = new string[] { "eat", "tea", "tan", "ate", "nat", "bat" };
         var groupedAnagrams = groupAnagrams.GroupAnagramStrings(strs);
         Console.WriteLine("Grouped Anagrams:");
@@ -330,67 +22,72 @@ internal class Program
         }
 
         var validateAnagram = new Leetcode.Problem242.ValidateAnagram();
-        Console.WriteLine($"============================ {validateAnagram.GetProblemTitle()} ============================");
+        Console.WriteLine($"\n============================ {validateAnagram.GetProblemTitle()} ============================");
         string s = "rat";
         string t = "car";
         Console.WriteLine($"Is \"{s}\" an anagram of \"{t}\": {(validateAnagram.IsAnagram(s, t) ? "true" : "false")}");
 
         var checkArrayDuplicates = new Leetcode.Problem217.CheckArrayDuplicates();
-        Console.WriteLine($"============================ {checkArrayDuplicates.GetProblemTitle()} ============================");
+        Console.WriteLine($"\n============================ {checkArrayDuplicates.GetProblemTitle()} ============================");
         int[] nums = { 1, 2, 3, 4, 4 };
         Console.Write($"Does array [{string.Join(", ", nums)}] contains duplicates: " +
-                    (checkArrayDuplicates.IsArrayContainsDuplicate(nums) ? "YES" : "NO"));
+                    (checkArrayDuplicates.IsArrayContainsDuplicate(nums) ? "YES\n" : "NO\n"));
 
+        var longestCommonPrefix = new Leetcode.Problem014.LongestCommonPrefix();
+        Console.WriteLine($"\n============================ {longestCommonPrefix.GetProblemTitle()} ============================");
+        string[] strss = { "flower", "flow", "flight" };
+        Console.WriteLine($"Longest Common Prefix is: \"{longestCommonPrefix.Find(strss)}\"");
 
+        var rotateArray = new Leetcode.Problem189.RotateArray();
+        Console.WriteLine($"\n============================ {rotateArray.GetProblemTitle()} ============================");
+        int[] arr = { 1, 2, 3, 4, 5, 6, 7 };
+        rotateArray.RotateArr(arr, 3);
+        Console.WriteLine($"Array after rotation: [{string.Join(", ", arr)}]");
 
-        /*
-        string str = " qadeer ";
-        string result = string.Empty;
-        foreach (char c in str)
-        {
-            if (c != ' ')
-            {
-                result += c;
-            }
-        }
+        var checkSubsequence = new Leetcode.Problem392.StringSubsequence();
+        Console.WriteLine($"\n============================ {checkSubsequence.GetProblemTitle()} ============================");
+        string t1 = "ahbgdc";
+        string s1 = "axc";
+        Console.WriteLine($"Is string \"{s1}\" subsequence of \"{t1}\" => {checkSubsequence.IsGivenStringASubSequenceOfOther(s1, t1)}");
 
-        //string str = "  This is a book   ";
-        string str1 = "Some String";
-        removeLeadingAndTrailingSpace(str);
+        var bstTimeToBuyAndSellStocks = new Leetcode.Problem121.BestTimeToBuyAndSellStocks();
+        Console.WriteLine($"\n========== {bstTimeToBuyAndSellStocks.GetProblemTitle()} ===========");
+        int[] stockPrices = { 7, 1, 5, 3, 6, 4 };
+        Console.WriteLine($"Maximum profit gained during transaction = {bstTimeToBuyAndSellStocks.BestTimeToBuyStock(stockPrices)}");
 
-        int[] arr = { 7, 8, 5, 2, 1 };
-        int[] sortedArray = sortArrayInSingleLoop(arr);
-        Console.WriteLine($"Reversed Array: {string.Join(", ", sortedArray)}");
-        int steps = climbStairs(4);
-        Console.WriteLine($"No of Steps are: {steps}");
+        var faultyKeyboard = new Leetcode.Problem2810.FaultyKeyboard();
+        Console.WriteLine($"\n============================ {faultyKeyboard.GetProblemTitle()} ============================");
+        string faultKeyBoardString = "poiinter";
+        Console.WriteLine($"String \"{faultKeyBoardString}\" after faulty keyboard input is: \"{faultyKeyboard.FaultyKeyboardFinalString(faultKeyBoardString)}\"");
 
-        Console.WriteLine("------------------------------------------------------------");
+        var reverseVowels = new Leetcode.Problem345.ReverseVowelsInString();
+        Console.WriteLine($"\n============================ {reverseVowels.GetProblemTitle()} ============================");
+        string test1 = "leetcode";
+        Console.WriteLine($"String \"{test1}\" after reversing its vowel is: \"{reverseVowels.ReverseVowelOfAString(test1)}\"");
 
-        int[] nums1 = { 1, 2, 3, 0, 0, 0 };
-        int[] nums2 = { 2, 5, 6 };
-        Merge(nums1, 3, nums2, 3);
+        var reverseString = new Leetcode.Problem344.ReverseString();
+        Console.WriteLine($"\n============================ {reverseString.GetProblemTitle()} ============================");
+        string test = "Hello";
+        Console.WriteLine($"Reverse of string \"{test}\" is: \"{reverseString.Reverse(test)}\"");
 
-        Console.WriteLine("------------------------------------------------------------");
+        var twoSumSimple = new Leetcode.Problem001.TwoSumSimple();
+        Console.WriteLine($"\n============================ {twoSumSimple.GetProblemTitle()} ============================");
+        int[] arr1 = { 2, 7, 11, 15 };
+        int[] simpleTwoSumIndex = twoSumSimple.GetTwoSumIndexes(arr1, 9);
+        Console.WriteLine($"Array: {nameof(arr1)} has target on indexes: [{simpleTwoSumIndex[0]}, {simpleTwoSumIndex[1]}]");
 
-        string strr = "A man, a plan, a canal: Panama";
+        var twoSumII = new Leetcode.Problem167.TwoSumII();
+        Console.WriteLine($"\n============================ {twoSumII.GetProblemTitle()} ============================");
+        int[] array = { 2, 3, 4 };
+        int[] twoSumIndex = twoSumII.GetTwoSumIndexes(array, 6);
+        Console.WriteLine($"Array: {nameof(array)} has target on indexes: [{twoSumIndex[0]}, {twoSumIndex[1]}]");
 
-        bool isValidPalindrom = IsPalindrome(strr);
-        Console.WriteLine($"String: {strr} ----  is valid palindrom ? : {isValidPalindrom}");
-
-        Console.WriteLine("------------------------------------------------------------");
-
-        string inputStr = "abcabcbb";
-        // Case2: 
-        inputStr = "pwwkew";
-        int lenOfLongestSubStr = LengthOfLongestSubstring(inputStr);
-        Console.WriteLine($"Input Str: {inputStr}: Length of Longest Substring: {lenOfLongestSubStr}");
-
-        Console.WriteLine("------------------------------------------------------------");
-
-        ListNode node1 = new ListNode(1);
-        ListNode node2 = new ListNode(2);
-        ListNode node3 = new ListNode(3);
-        ListNode node4 = new ListNode(4);
+        var checkCycleInLinkedList = new Leetcode.Problem141.CycleInLinkedList();
+        Console.WriteLine($"\n============================ {checkCycleInLinkedList.GetProblemTitle()} ============================");
+        var node1 = new Leetcode.Problem141.ListNode(1);
+        var node2 = new Leetcode.Problem141.ListNode(2);
+        var node3 = new Leetcode.Problem141.ListNode(3);
+        var node4 = new Leetcode.Problem141.ListNode(4);
 
         // Creating a cycle
         node1.next = node2;
@@ -399,57 +96,20 @@ internal class Program
         //node4.next = node2;
 
         // No Cycle
-
         node4.next = null;
+        Console.WriteLine($"Linklist head {nameof(node1)} has cycle: {checkCycleInLinkedList.HasCycle(node1)}");
 
-        bool isLLCyclic = HasCycle(node1);
+        var longestSubstringWithoutRepeatingChars = new Leetcode.Problem003.LongestSubstringWithoutRepeatingChars();
+        Console.WriteLine($"\n============== {longestSubstringWithoutRepeatingChars.GetProblemTitle()} ================");
+        string inputStr = "abcabcbb";
+        // Case2: 
+        //inputStr = "pwwkew";
+        int lenOfLongestSubStr = longestSubstringWithoutRepeatingChars.LengthOfLongestSubstring(inputStr);
+        Console.WriteLine($"Input Str: \"{inputStr}\": Length of Longest Substring: {lenOfLongestSubStr}");
 
-        Console.WriteLine($"Linklist head {nameof(node1)} has cycle: {isLLCyclic}");
-
-        Console.WriteLine("------------------------------------------------------------");
-        //int[] arr = { 2, 7, 11, 15 };
-        //int[] twoSumIndex = TwoSum(arr, 9);
-
-        int[] arr = { 2, 3, 4 };
-        int[] twoSumIndex = TwoSum(arr, 6);
-
-        Console.WriteLine($"Array: {nameof(arr)} has target on indexes: [{twoSumIndex[0]}, {twoSumIndex[1]}]");
-
-        int[] arr1 = { 2, 7, 11, 15 };
-        int[] simpleTwoSumIndex = TwoSumSimple(arr1, 9);
-        Console.WriteLine($"Array: {nameof(arr1)} has target on indexes: [{simpleTwoSumIndex[0]}, {simpleTwoSumIndex[1]}]");
-
-        string test = "Hello";
-        Console.WriteLine($"Reverse of string \"{test}\" is: \"{ReverseString(test)}\"");
-
-        string test1 = "leetcode";
-        Console.WriteLine($"String \"{test1}\" after reversing its vowel is: \"{ReverseVowelOfAString(test1)}\"");
-
-        int[] stockPrices = { 7, 1, 5, 3, 6, 4 };
-        Console.WriteLine($"Maximum profit gained during transaction = {BestTimeToBuyStock(stockPrices)}");
-
-        string t = "ahbgdc";
-        string s = "axc";
-        Console.WriteLine($"IsGivenStringASubSequenceOfOther => {IsGivenStringASubSequenceOfOther(s, t)}");
-
-        int[] arr = { 1, 2, 3, 4, 5, 6, 7 };
-        RotateArray(arr, 3);
-        Console.WriteLine("Array after rotation");
-        foreach (int i in arr)
-        {
-            Console.WriteLine(i);
-        }
-
-        string faultKeyBoardString = "poiinter";
-        Console.WriteLine($"String \"{faultKeyBoardString}\" after faulty keyboard input is: \"{FaultyKeyboardFinalString(faultKeyBoardString)}\"");
-
-        string[] strs = { "dog", "racecar", "car" };
-        Console.WriteLine($"Longest Common Prefix is: \"{FindLongestCommonPrefix(strs)}\"");
-
-        string[] strs = { "flower", "flow", "flight" };
-        Array.Sort(strs);
-        foreach(string str in strs) Console.WriteLine(str);
-        */
-
+        var climbStairs = new Leetcode.Problem070.ClimbStairs();
+        Console.WriteLine($"\n============================ {climbStairs.GetProblemTitle()} ============================");
+        int steps = climbStairs.DistinctWaysToClimbStairs(4);
+        Console.WriteLine($"No of distinct ways to climb stairs are: {steps}");
     }
 }

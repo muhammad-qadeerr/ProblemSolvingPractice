@@ -1,0 +1,27 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace ProblemSolvingPratice.Leetcode.Problem003;
+
+internal class LongestSubstringWithoutRepeatingChars
+{
+    private string Title => "Leetcode 3. Longest Substring Without Repeating Characters";
+    private string Url => "https://leetcode.com/problems/longest-substring-without-repeating-characters/description/";
+    public string GetProblemTitle() => Title;
+    public int LengthOfLongestSubstring(string s)
+    {
+        HashSet<char> charSet = new HashSet<char>();
+        int left = 0, maxLength = 0;
+        for (int right = 0; right < s.Length; right++)
+        {
+            while (charSet.Contains(s[right]))
+            {
+                charSet.Remove(s[left]);
+                left++;
+            }
+            charSet.Add(s[right]);
+            maxLength = Math.Max(maxLength, right - left + 1);
+        }
+        return maxLength;
+    }
+}

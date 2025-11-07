@@ -1,0 +1,36 @@
+﻿namespace ProblemSolvingPratice.Leetcode.Problem141;
+
+public class ListNode
+{
+    public int val;
+    public ListNode next;
+    public ListNode(int x)
+    {
+        val = x;
+        next = null;
+    }
+}
+internal class CycleInLinkedList
+{
+    private string Title => "Leetcode 141. Linked List Cycle";
+    private string Url => "https://leetcode.com/problems/linked-list-cycle/description/";
+    public string GetProblemTitle() => Title;
+    public bool HasCycle(ListNode head)
+    {
+        if (head == null || head.next == null)
+            return false;
+
+        ListNode slow = head;
+        ListNode fast = head;
+
+        while (fast != null && fast.next != null)
+        {
+            slow = slow.next;
+            fast = fast.next.next;
+
+            if (slow == fast)
+                return true;
+        }
+        return false;
+    }
+}
